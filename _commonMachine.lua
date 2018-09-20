@@ -93,5 +93,3 @@ while true do
 	event, par1, par2, par3, par4, par5 = os.pullEvent()
 
 end
-
---asdasdasd
