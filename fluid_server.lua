@@ -2,6 +2,7 @@
 TEXT_SCALE = 0.5
 SLEEP_AMOUNT = 0.5
 TIMER_CYCLE = 15
+MAX_BUCKETS = 16
 
 -- DATA
 ID = os.getComputerID()
@@ -202,7 +203,7 @@ while true do
 	elseif event == "key" then 
 		local choose = readIO_number(">> ",table.getn(fluids))
 		if choose ~= 0 then
-			local qty = readIO_number(">> Number of buckets: ",10)
+			local qty = readIO_number(">> Number of buckets: ", MAX_BUCKETS)
 			if qty ~= 0 then
 				local fluidID = tonumber(fluids[choose].fluidID)
 				send(fluidID,qty)

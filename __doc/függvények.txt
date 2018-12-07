@@ -1,0 +1,56 @@
+local rNames -- declare empty var to later hold indexed table of present remote names
+
+for _,side in ipairs(rs.getSides()) do
+  if peripheral.getType(side) == "modem" and peripheral.call(side,"isWireless") == false then
+        rNames = peripheral.call(side,"getNamesRemote") -- We found the wired modem. Fill our 'rNames' var with a table of remote names
+  end
+end
+
+local myRemotes = {} -- your to be wrapped remotes. Empty...
+-- Go through our rNames table of names and create a key in myRemotes with the remote object as the value
+for i = 1,#rNames do
+ -- myRemotes[remoteName] = peripheral.wrap(remoteName)
+  myRemotes[rNames[i]] = peripheral.wrap(rNames[i])
+end
+
+
+if string.match(peripheralName, "(.*_%d+$)") then
+  --# peripheralName contains a remote peripheral name.
+end
+
+
+
+-- Returns a table with the sides and peripheral types
+function getPeripheralList()
+local sides = peripheral.getNames()
+local pTable = {}
+
+for k,side in pairs(sides) do
+pTable[side] = peripheral.getType(side)
+end
+
+return pTable
+end
+
+-- finds the first peripheral of type 'peripheralType' and wraps it
+function getPeripheral(peripheralType)
+local pTable = getPeripheralList()
+for side, pType in pairs(pTable) do
+if(peripheralType == pType) then
+return peripheral.wrap(side)
+end
+end
+return nil
+end
+
+-- finds all peripherals of type 'peripheralType' and wraps them
+function getAllPeripherals(peripheralType)
+local pTable = getPeripheralList()
+local wrappedTable = {}
+for side, pType in pairs(pTable) do
+if(peripheralType == pType) then
+wrappedTable[side] = peripheral.wrap(side)
+end
+end
+return wrappedTable
+end

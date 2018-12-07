@@ -1,0 +1,3 @@
+tile_thermalexpansion_cell_*_name
+
+* = {"resonant", "creative"}
